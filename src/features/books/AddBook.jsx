@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { addBook } from "./BooksSlice";
 
 const AddBook = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const numberBooks = useSelector((state) => state.booksReducer.books.length);
 
@@ -16,6 +17,7 @@ const AddBook = () => {
     e.preventDefault();
     const book = { id: numberBooks + 1, title, author, description };
     dispatch(addBook(book));
+    navigate("/");
   };
 
   return (

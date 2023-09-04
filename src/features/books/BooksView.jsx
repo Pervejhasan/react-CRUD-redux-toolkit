@@ -1,7 +1,13 @@
 import Table from "react-bootstrap/Table";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteBook } from "./BooksSlice";
 const BooksView = () => {
   const books = useSelector((state) => state.booksReducer.books);
+  const dispatch = useDispatch();
+  const handleDelete = (id) => {
+    dispatch(deleteBook(id));
+  };
+
   return (
     <div>
       <h2 className="text-center py-3 text-secondary">Show All Books</h2>
@@ -40,7 +46,10 @@ const BooksView = () => {
                               <button className="px-3 mb-2 btn btn-sm rounded-sm fw-bold  me-2 border-0 py-1 text-white bg-warning">
                                 Edit
                               </button>
-                              <button className="px-3 mb-2 btn btn-sm rounded-sm fw-bold  border-0 py-1 text-white bg-danger">
+                              <button
+                                onClick={() => handleDelete(id)}
+                                className="px-3 mb-2 btn btn-sm rounded-sm fw-bold  border-0 py-1 text-white bg-danger"
+                              >
                                 Delete
                               </button>
                             </td>
